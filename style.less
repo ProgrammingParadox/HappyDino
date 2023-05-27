@@ -1,0 +1,126 @@
+
+@main: rgba(50, 150, 200, 0.9);
+
+html, body {
+  height: 100%;
+  width: 100%;
+
+  margin: 0px;
+  padding: 0px;
+
+  font-family: "Inter";
+}
+
+@size: 0;
+
+#nav {
+  background-color: @main;
+  backdrop-filter: blur(10px);
+
+	box-sizing: border-box;
+
+  box-shadow: 
+		inset 0px -2px fadein(@main, 20%),
+		// inset 0px 7px 5px lighten(@main, 10%),
+		inset 0px -7px 5px fadein(@main, 10%);
+  
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  
+  display: flex;
+  justify-content: space-between;
+  flex-align: stretch;
+
+  color: #FFF;
+
+	#nav-top {
+		height: 100px;
+
+		background-color: #FFF;
+	}
+
+	#nav-bottom {
+	  #nav-title {
+	    padding: 40px;
+	  }
+	
+	  #nav-left {
+	    
+	  }
+	
+	  #nav-center {
+	    display: flex;
+	
+	    justify-content: space-between;
+	    flex-align: flex-end;
+	
+			padding-right: 20px;
+	
+			.nav-item {
+				display: flex;
+				align-items: flex-end;
+	
+				padding: 0px;
+				
+				fill: #DDD;
+	
+				.nav-item-name {
+					background-color: #FFF;
+	
+					cursor: default;
+	
+					color: #000;
+					
+					padding: 5px 15px 5px 15px;
+	
+					box-sizing: border-box;
+					
+					// border: solid 2px fadein(@main, 20%);
+					// border-bottom: none;
+					// border-right: none;
+	
+					height: 30% + @size;
+					
+					margin-right: 2px;
+					
+					border-radius: 8px 8px 0px 0px;
+	
+					box-shadow: 
+						0px -2px 2px fadein(@main, 20%),
+						2px -2px 2px fadein(@main, 20%),
+						-2px -2px 2px fadein(@main, 20%),
+						
+						inset 0px 5px 10px rgba(200, 200, 200, 0.3);
+	
+					// transition-duration: 0.2s;
+	
+					&:not(.active) {
+						box-shadow: 
+							0px -1px 1px fadein(@main, 20%),
+		
+							inset 1px 0px 1px rgba(150, 150, 150, 0.3),
+							inset -1px 0px 1px rgba(150, 150, 150, 0.3),
+							inset 0px -7px 20px rgba(200, 200, 200, 0.3),
+	
+							inset 0px 1px 1px rgba(255, 255, 255, 0.3);
+	
+						&:hover {
+							box-shadow: 
+								0px -1px 1px fadein(@main, 20%),
+			
+								inset 1px 0px 1px rgba(150, 150, 150, 0.3),
+								inset -1px 0px 1px rgba(150, 150, 150, 0.3),
+								inset 0px -7px 20px rgba(200, 200, 200, 0.3),
+		
+								inset 0px 1px 1px rgba(255, 255, 255, 0.3);
+	
+							// height: 50% + 5px;
+						}
+					}
+				}
+			}
+	  }
+	}
+}
