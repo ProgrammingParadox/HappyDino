@@ -1,5 +1,5 @@
 
-const SPRING_TARGET = 30;
+const SPRING_TARGET = 50;
 
 function springv(x, xv, a, b, target=0){
 	xv *= a;

@@ -1,5 +1,5 @@
 
-@main: rgba(50, 150, 200, 0.9);
+@main: rgba(237, 254, 254, 0.9);
 
 html, body {
   height: 100%;
@@ -14,16 +14,6 @@ html, body {
 @size: 0;
 
 #nav {
-  background-color: @main;
-  backdrop-filter: blur(10px);
-
-	box-sizing: border-box;
-
-  box-shadow: 
-		inset 0px -2px fadein(@main, 20%),
-		// inset 0px 7px 5px lighten(@main, 10%),
-		inset 0px -7px 5px fadein(@main, 10%);
-  
   position: fixed;
   top: 0px;
   left: 0px;
@@ -32,6 +22,7 @@ html, body {
   display: flex;
   justify-content: space-between;
   flex-align: stretch;
+	flex-direction: column;
 
   color: #FFF;
 
@@ -42,9 +33,19 @@ html, body {
 	}
 
 	#nav-bottom {
-	  #nav-title {
-	    padding: 40px;
-	  }
+		background-color: @main;
+	  backdrop-filter: blur(10px);
+	
+		box-sizing: border-box;
+	
+	  box-shadow: 
+			inset 0px -2px fadein(@main, 20%),
+			// inset 0px 7px 5px lighten(@main, 10%),
+			inset 0px -7px 5px fadein(@main, 10%);
+
+		display: flex;
+	  justify-content: space-between;
+	  flex-align: stretch;
 	
 	  #nav-left {
 	    
@@ -55,8 +56,8 @@ html, body {
 	
 	    justify-content: space-between;
 	    flex-align: flex-end;
-	
-			padding-right: 20px;
+
+			height: 80px;
 	
 			.nav-item {
 				display: flex;
@@ -73,7 +74,7 @@ html, body {
 	
 					color: #000;
 					
-					padding: 5px 15px 5px 15px;
+					padding: 10px 20px 10px 20px;
 	
 					box-sizing: border-box;
 					
@@ -81,11 +82,13 @@ html, body {
 					// border-bottom: none;
 					// border-right: none;
 	
-					height: 30% + @size;
+					height: 50% + @size;
+
+					&:not(last-child){
+						margin-right: 30px;
+					}
 					
-					margin-right: 2px;
-					
-					border-radius: 8px 8px 0px 0px;
+					border-radius: 10px 10px 0px 0px;
 	
 					box-shadow: 
 						0px -2px 2px fadein(@main, 20%),
