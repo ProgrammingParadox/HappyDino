@@ -1,4 +1,7 @@
 
+// Only took a bunch of work- but it works!!
+// https://replit.com/@Paradoxian/Bennetts-lazy
+
 const SPRING_TARGET = 50;
 
 function springv(x, xv, a, b, target=0){
@@ -9,7 +12,6 @@ function springv(x, xv, a, b, target=0){
 }
 
 window.addEventListener("load", function(){
-
 	// load nav bar into body
 	fetch("../nav.html")
 		.then((d) => d.text())
@@ -97,4 +99,10 @@ window.addEventListener("load", function(){
 
 			return d;
 		});
+
+	window.addEventListener("resize", function(event){
+		if(window.innerWidth < 650) {
+			console.log(window.innerWidth);
+		}
+	});
 });
