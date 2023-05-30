@@ -11,6 +11,61 @@ function springv(x, xv, a, b, target=0){
 	return xv;
 }
 
+function drawComic(path, canvas, split) {
+	let WIDTH = 5046;
+	let HEIGHT = 1226;
+	
+	let MIDDLE_OFFSET = 25;
+
+	let renderImage = function(blob, split){
+	  let ctx = this.getContext('2d');
+	  let img = new Image();
+	
+	  img.onload = function(){
+			console.log(img.width);
+
+			img.src = URL.createObjectURL(blob);
+			
+	    ctx.drawImage(img, 0, 0);
+	
+			const imageData = ctx.getImageData(0, 0, WIDTH, HEIGHT);
+
+			switch(split) {
+				default:
+				case 0:
+					this.setAttribute("width", WIDTH);
+					this.setAttribute("height", HEIGHT);
+
+					ctx.drawImage(img, 0, 0);
+				break;
+					
+				case 1: 
+					this.setAttribute("width", WIDTH/2);
+					this.setAttribute("height", (HEIGHT*2) + 50);
+			
+					canvas.style.width = "80%";
+			
+					ctx.fillStyle = "white";
+					ctx.fillRect(0, 0, WIDTH, HEIGHT);
+					
+				  ctx.putImageData(imageData, 0, 0, 0, 0, (WIDTH/2) + MIDDLE_OFFSET, HEIGHT);
+				  ctx.putImageData(imageData, -MIDDLE_OFFSET-WIDTH/2, HEIGHT + 50, WIDTH/2, 0, WIDTH, HEIGHT);
+				break;
+			}
+	  }
+	};
+
+	if(canvas){
+		fetch(path)
+			.then((blarb) => {
+				return blarb.blob();
+			})
+			.then((blag) => {
+				renderImage.call(canvas, blag, split);
+			});
+	}
+}
+
 window.addEventListener("load", function(){
 	// load nav bar into body
 	fetch("../nav.html")
@@ -100,9 +155,16 @@ window.addEventListener("load", function(){
 			return d;
 		});
 
+	let canvas = document.getElementById("strip");
+
+	if(canvas) drawComic("./comics/1.png", canvas, 0);
+	
+	let lastWidth = window.innerWidth;
 	window.addEventListener("resize", function(event){
 		if(window.innerWidth < 650) {
-			console.log(window.innerWidth);
+			
+		} else {
+			
 		}
 	});
 });
