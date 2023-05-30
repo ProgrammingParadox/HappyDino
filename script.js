@@ -20,9 +20,11 @@ function drawComic(path, canvas, split) {
 	let renderImage = function(blob, split){
 	  let ctx = this.getContext('2d');
 	  let img = new Image();
-	
+
+		console.log("hello");
+		img.onerror = function() {console.log("Image failed!");};
 	  img.onload = function(){
-			console.log(img.width);
+			// console.log("Here: " + img.width);
 
 			img.src = URL.createObjectURL(blob);
 			
@@ -52,10 +54,12 @@ function drawComic(path, canvas, split) {
 				  ctx.putImageData(imageData, -MIDDLE_OFFSET-WIDTH/2, HEIGHT + 50, WIDTH/2, 0, WIDTH, HEIGHT);
 				break;
 			}
-	  }
+	  };
+
+		console.log("Golly gee");
 	};
 
-	if(canvas){
+	if(canvas){							 
 		fetch(path)
 			.then((blarb) => {
 				return blarb.blob();
