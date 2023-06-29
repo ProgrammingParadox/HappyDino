@@ -2,7 +2,9 @@
 // Only took a bunch of work- but it works!!
 // https://replit.com/@Paradoxian/Bennetts-lazy
 
-const SPRING_TARGET = 50;
+// needs some more work
+
+const SPRING_TARGET = 5;
 
 function springv(x, xv, a, b, target=0){
 	xv *= a;
@@ -21,12 +23,12 @@ function drawComic(path, canvas, split) {
 	  let ctx = this.getContext('2d');
 	  let img = new Image();
 
-		console.log("hello");
-		img.onerror = function() {console.log("Image failed!");};
-	  img.onload = function(){
-			// console.log("Here: " + img.width);
+		img.src = URL.createObjectURL(blob);
 
-			img.src = URL.createObjectURL(blob);
+		img.onerror = function() { console.log("Image failed! Whoops :/"); };
+	  img.onload = function() {
+			canvas.setAttribute("width", WIDTH);
+			canvas.setAttribute("height", HEIGHT);
 			
 	    ctx.drawImage(img, 0, 0);
 	
@@ -35,17 +37,19 @@ function drawComic(path, canvas, split) {
 			switch(split) {
 				default:
 				case 0:
-					this.setAttribute("width", WIDTH);
-					this.setAttribute("height", HEIGHT);
+					canvas.style.width = "80%";
+					
+					canvas.setAttribute("width", WIDTH);
+					canvas.setAttribute("height", HEIGHT);
 
 					ctx.drawImage(img, 0, 0);
 				break;
 					
 				case 1: 
-					this.setAttribute("width", WIDTH/2);
-					this.setAttribute("height", (HEIGHT*2) + 50);
-			
 					canvas.style.width = "80%";
+					
+					canvas.setAttribute("width", WIDTH/2);
+					canvas.setAttribute("height", (HEIGHT*2) + 50);
 			
 					ctx.fillStyle = "white";
 					ctx.fillRect(0, 0, WIDTH, HEIGHT);
@@ -55,8 +59,6 @@ function drawComic(path, canvas, split) {
 				break;
 			}
 	  };
-
-		console.log("Golly gee");
 	};
 
 	if(canvas){							 
@@ -89,60 +91,73 @@ window.addEventListener("load", function(){
 	
 		// Initialize nav bar items
 		.then((d) => {
-			let page = document.getElementById("nav-holder").dataset.page;
-			
-			let navItemNames = document.querySelectorAll(".nav-item-name");
-			for(let i = 0; i<navItemNames.length; i++){
-				let c = navItemNames[i];
 
+			let page = document.getElementById("nav-holder").dataset.page;
+						
+			let navItems = document.querySelectorAll(".nav-item");
+			for(let i = 0; i<navItems.length; i++){
+				let c = navItems[i];
+				let n = c.querySelectorAll(".nav-item-name");
+					
 				// active
 				(c.dataset.page == page) ?
 					c.classList.add("active")
 				:
 					c.classList.remove("active");
-		
+			
+				// click
+				c.addEventListener("click", function(e){
+					window.location = e.target.dataset.link;
+				});
+				
+				const mediaQuery = window.matchMedia('(max-width: 500px)');
+				if (mediaQuery.matches) {
+				  continue;
+				}
+				
+				if(n.classList.contains("active")){
+					n.style.marginBottom = (SPRING_TARGET + 10) + "px";
+			
+					continue;
+				}
+				
 				// boingy
 				c.addEventListener("mouseenter", function(){
-					let e = event.target;
+					let e = n;
 					let spring = [0, 0, 0.8, 0.2];
 					
 					function animate(){
 						spring[1] = springv.apply(null, spring.concat(10));
 						spring[0] += spring[1];
 						
-						e.style.height = (SPRING_TARGET + spring[0]) + "%";
-		
+						e.style.marginBottom = (SPRING_TARGET + spring[0]) + "px";
+			
 						if(Math.abs(spring[1]) > 0.00001){
 							window.requestAnimationFrame(animate);
 						}
 					};
-		
+			
 					animate();
 				});
 				c.addEventListener("mouseleave", function(){
-					let e = event.target;
+					let e = n;
 					let spring = [10, 0, 0.8, 0.2];
 					
 					function animate(){
 						spring[1] = springv.apply(null, spring.concat(0));
 						spring[0] += spring[1];
 						
-						e.style.height = (SPRING_TARGET + spring[0]) + "%";
-		
+						e.style.marginBottom = (SPRING_TARGET + spring[0]) + "px";
+			
 						if(Math.abs(spring[1]) > 0.00001){
 							window.requestAnimationFrame(animate);
 						}
 					};
-		
+			
 					animate();
 				});
-		
-				// click
-				c.addEventListener("click", function(e){
-					window.location = e.target.dataset.link;
-				});
 			}
-
+			
 			return d;
 		})
 
@@ -161,14 +176,24 @@ window.addEventListener("load", function(){
 
 	let canvas = document.getElementById("strip");
 
-	if(canvas) drawComic("./comics/1.png", canvas, 0);
-	
-	let lastWidth = window.innerWidth;
-	window.addEventListener("resize", function(event){
+	// makes the comic responsive so 
+	// on phones it's not too small
+	if(canvas) {
+		let lastWidth = window.innerWidth;
 		if(window.innerWidth < 650) {
-			
+			drawComic("./comics/1.png", canvas, 1);
 		} else {
-			
+			drawComic("./comics/1.png", canvas, 0);
 		}
-	});
+				
+		window.addEventListener("resize", function(event){
+			if(lastWidth >= 650 && window.innerWidth < 650) {
+				drawComic("./comics/1.png", canvas, 1);
+			} else if (lastWidth <= 650 && window.innerWidth > 650) {
+				drawComic("./comics/1.png", canvas, 0);
+			}
+
+			lastWidth = window.innerWidth;
+		});
+	}
 });
