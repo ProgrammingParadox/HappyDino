@@ -1,4 +1,6 @@
-@main: rgba(200, 230, 230, 0.9);
+@main: rgb(159, 229, 246);
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
 
 html, body {
   height: 100%;
@@ -7,7 +9,7 @@ html, body {
   margin: 0px;
   padding: 0px;
 
-  font-family: "Inter";
+  font-family: "Outfit", sans-serif;
 }
 
 @size: 0;
@@ -29,7 +31,7 @@ html, body {
 
 	#nav-bottom {
 		background-color: @main;
-	  backdrop-filter: blur(10px);
+	  // backdrop-filter: blur(10px);
 	
 		box-sizing: border-box;
 
@@ -37,7 +39,7 @@ html, body {
 	  justify-content: space-between;
 	  flex-align: stretch;
 
-		border-bottom: solid 2px #111;
+		//border-bottom: solid 2px #111;
 	
 	  #nav-left {
 	    flex-grow: 1;
@@ -83,7 +85,7 @@ html, body {
 				}
 	
 				.nav-item-name {
-					background-color: #FFF;
+					background-color: transparent;
 	
 					cursor: default;
 
@@ -97,8 +99,8 @@ html, body {
 					//	padding: 5px 10px 5px 10px;
 					//}
 
-					min-width: 100px;
-					max-width: 130px;
+					min-width: 150px;
+					max-width: 170px;
 					@media (max-width: 500px){
 						min-width: 85px;
 						max-width: 130px;
@@ -119,9 +121,9 @@ html, body {
 	
 					height: 50% + @size;
 
-					box-shadow: inset 0px 0px 0px 2px #111; //,
+					//box-shadow: inset 0px 0px 0px 2px #111; //,
 											// inset 0px -2px 0px 2px #111;
-					border-bottom: solid 1px #111; 
+					//border-bottom: solid 1px #111; 
 					
 					margin-bottom: 5px;
 					
@@ -130,12 +132,15 @@ html, body {
 					font-weight: 500;
 
 					&.active {
-						margin-bottom: 10px;
+						//margin-bottom: 10px;
+						background-color: #FFF;
+						
+						font-weight: 600;
 					}
 	
 					// transition-duration: 0.2s;
 				}
-
+				
         &:not(:last-child){
 					.nav-item-name {
 						margin-right: 5px;

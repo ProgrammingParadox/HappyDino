@@ -6,6 +6,7 @@
 
 const SPRING_TARGET = 5;
 
+// spring physikz
 function springv(x, xv, a, b, target=0){
 	xv *= a;
 	xv += (target-x) * b;
@@ -97,26 +98,28 @@ window.addEventListener("load", function(){
 			let navItems = document.querySelectorAll(".nav-item");
 			for(let i = 0; i<navItems.length; i++){
 				let c = navItems[i];
-				let n = c.querySelectorAll(".nav-item-name");
-					
+				let n = c.querySelectorAll(".nav-item-name")[0];
+				
 				// active
-				(c.dataset.page == page) ?
-					c.classList.add("active")
+				(n.dataset.page == page) ?
+					n.classList.add("active")
 				:
-					c.classList.remove("active");
+					n.classList.remove("active");
 			
 				// click
 				c.addEventListener("click", function(e){
-					window.location = e.target.dataset.link;
+					window.location = n.dataset.link;
 				});
 				
 				const mediaQuery = window.matchMedia('(max-width: 500px)');
 				if (mediaQuery.matches) {
+					console.log(mediaQuery);
+					
 				  continue;
 				}
 				
 				if(n.classList.contains("active")){
-					n.style.marginBottom = (SPRING_TARGET + 10) + "px";
+					// n.style.marginBottom = (SPRING_TARGET + 10) + "px";
 			
 					continue;
 				}
