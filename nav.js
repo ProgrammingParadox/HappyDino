@@ -112,7 +112,10 @@ window.addEventListener("load", function(){
 		
 			let navBB = nav.getBoundingClientRect();
 		
-			navHolder.style.height = navBB.height + "px";
+			//navHolder.style.height = navBB.height + "px";
+
+			let logo = document.getElementById("logo");
+			logo.setAttribute("width", 100)
 
 			return d;
 		});

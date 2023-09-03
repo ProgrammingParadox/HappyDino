@@ -15,14 +15,16 @@ html, body {
 @size: 0;
 
 #nav {
-  position: fixed;
+  //position: fixed;
   top: 0px;
   left: 0px;
   right: 0px;
+
+	z-index: 999;
   
   display: flex;
-  justify-content: space-between;
-  flex-align: stretch;
+  justify-content: center;
+  flex-align: center;
 	flex-direction: column;
 
   color: #FFF;
@@ -49,12 +51,14 @@ html, body {
 		}
 	
 	  #nav-center {
+			z-index: 999;
+			
 	    display: flex;
 	
 	    justify-content: space-around;
 	    flex-align: flex-end;
 
-			height: 80px;
+			height: 90px;
 	
 			.nav-item {
 				display: flex;
@@ -172,16 +176,32 @@ html, body {
 	  }
 	}
 }
+#logo {
+	padding: 10px;
+}
 
 #strip-of-the-day {
 	display: flex;
+	flex-direction: column;
 
 	padding-top: 5%;
 
 	justify-content: space-around;
+	align-items: center;
 }
 #strip {
 	width: 50%;
+}
+#comic-nav {
+	display: flex;
+	justify-content: space-between;
+
+	padding: 1%;
+}
+#comic-nav > button {
+	&:not(last-child){
+		margin-right: 10px;
+	}
 }
 
 #strips {
