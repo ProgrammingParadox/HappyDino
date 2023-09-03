@@ -115,7 +115,7 @@ window.addEventListener("load", function(){
 			//navHolder.style.height = navBB.height + "px";
 
 			let logo = document.getElementById("logo");
-			logo.setAttribute("width", 100)
+			logo.setAttribute("width", 140)
 
 			return d;
 		});

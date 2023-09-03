@@ -39,30 +39,33 @@ html, body {
 
 		display: flex;
 	  justify-content: space-between;
-	  flex-align: stretch;
+	  align-items: flex-end;
 
 		//border-bottom: solid 2px #111;
 	
 	  #nav-left {
-	    flex-grow: 1;
+	    position: absolute;
+
+			top: 0px;
+			left: 0px;
 	  }
-		#nav-end {
-			flex-grow: 1;
-		}
 	
 	  #nav-center {
 			z-index: 999;
+
+			margin: auto;
 			
 	    display: flex;
 	
-	    justify-content: space-around;
-	    flex-align: flex-end;
+	    justify-content: center;
+			align-items: flex-end;
 
 			height: 90px;
 	
 			.nav-item {
 				display: flex;
-				align-items: flex-end;
+
+				align-items: flex-center;
 	
 				padding: 0px;
 				
@@ -177,7 +180,7 @@ html, body {
 	}
 }
 #logo {
-	padding: 10px;
+	padding: 10px 10px 10px 20px;
 }
 
 #strip-of-the-day {
