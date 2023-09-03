@@ -21,11 +21,17 @@ window.addEventListener('load', function(){
 	let last = document.getElementById("last");
 	let next = document.getElementById("next");
 
-	next.addEventListener("click", function() {
-		let strip = document.getElementById("strip").dataset.strip;
-
-		window.location = "?strip=" + (parseInt(strip, 10) + 1);
-	});
+	let strip = document.getElementById("strip").dataset.strip;
+	fetch("comics/"+(parseInt(strip, 10) + 1))
+			.then((a) => {
+				if(a.status != 404){
+					next.addEventListener("click", function() {
+						let strip = document.getElementById("strip").dataset.strip;
+						
+						window.location = "?strip=" + (parseInt(strip, 10) + 1);
+					});
+				}
+			});
 
 	last.addEventListener("click", function() {
 		let strip = document.getElementById("strip").dataset.strip;
