@@ -22,16 +22,16 @@ window.addEventListener('load', function(){
 	let next = document.getElementById("next");
 
 	let strip = document.getElementById("strip").dataset.strip;
-	fetch("comics/"+(parseInt(strip, 10) + 1)+".png")
-			.then((a) => {
-				if(a.status != 404){
-					next.addEventListener("click", function() {
-						let strip = document.getElementById("strip").dataset.strip;
-						
-						window.location = "?strip=" + (parseInt(strip, 10) + 1);
-					});
-				}
-			});
+	fetch("comics/"+(parseInt(strip, 10) + 1)+".png", { method: "HEAD" })
+		.then((a) => {
+			if(a.ok){
+				next.addEventListener("click", function() {
+					let strip = document.getElementById("strip").dataset.strip;
+					
+					window.location = "?strip=" + (parseInt(strip, 10) + 1);
+				});
+			}
+		});
 
 	last.addEventListener("click", function() {
 		let strip = document.getElementById("strip").dataset.strip;
