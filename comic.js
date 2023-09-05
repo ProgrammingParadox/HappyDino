@@ -30,6 +30,8 @@ window.addEventListener('load', function(){
 					
 					window.location = "?strip=" + (parseInt(strip, 10) + 1);
 				});
+			} else {
+				next.remove();
 			}
 		});
 
